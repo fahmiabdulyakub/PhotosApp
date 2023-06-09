@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from '@themes';
 import {Home} from '@screens';
-import {StackParams} from '@types/navigationType';
+import {StackParams} from '@types';
 
 const Stack = createNativeStackNavigator<StackParams>();
 
