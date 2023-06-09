@@ -13,6 +13,7 @@ module.exports = {
           '@themes': './src/themes',
           '@services': './src/services',
           '@utils': './src/utils',
+          '@types': './src/types',
         },
       },
     ],

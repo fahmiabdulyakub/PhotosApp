@@ -8,10 +8,13 @@
       "@constants": ["./src/constants"],
       "@screens": ["./src/screens"],
       "@types/*": ["./src/types/*"],
+      "@types": ["./src/types"],
       "@utils/*": ["./src/utils/*"],
       "@services/*": ["./src/services/*"],
+      "@themes": ["./src/themes"]
     },
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
+  "include": ["./src/**/*"]
 }
