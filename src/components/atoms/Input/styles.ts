@@ -17,7 +17,7 @@ export default StyleSheet.create({
     fontSize: hp(1.8),
     fontFamily: Fonts.Inter,
     color: Colors.gray,
-    width: wp(60),
+    flex: 1,
     top: 1,
   },
 });
