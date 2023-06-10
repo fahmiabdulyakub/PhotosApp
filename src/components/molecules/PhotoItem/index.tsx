@@ -6,7 +6,7 @@ import styles from './styles';
 const PhotoItem = ({photo, onPress}: PhotoItemProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress(photo)}>
-      <Image source={{uri: photo.urls.thumb}} style={styles.thumbnail} />
+      <Image source={{uri: photo.urls.regular}} style={styles.thumbnail} />
       <View style={styles.detailsContainer}>
         {photo.description && (
           <Text style={styles.title}>{photo.description}</Text>
