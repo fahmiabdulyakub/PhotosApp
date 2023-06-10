@@ -17,6 +17,7 @@ export const searchPhotos = (query: string, page: number) => {
         resolve(result.data.results);
       })
       .catch(error => {
+        resolve([]);
         console.log(error);
       });
   });
