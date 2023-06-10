@@ -20,6 +20,7 @@ const useHome = () => {
   const handleSearch = (query: string) => {
     setPage(1);
     setPhotos([]);
+    setIsAllFetched(false);
     fetchPhotos(query, 1);
   };
 
