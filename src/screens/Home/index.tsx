@@ -3,18 +3,20 @@ import React from 'react';
 import styles from './styles';
 import useHome from './hooks/useHome';
 import {FooterPagination, Input} from '@components/atoms';
-import {PhotoItem} from '@components/molecules';
+import {FullSizePhotoModal, PhotoItem} from '@components/molecules';
 import {IPhotoItem} from './types';
 
 const Home = () => {
   const {
     photos,
     searchQuery,
+    selectedPhoto,
     isLoading,
     isRefresh,
     onSearch,
     onPhotoPress,
     onLoadMore,
+    onCloseModal,
     handleRefresh,
   } = useHome();
 
@@ -38,6 +40,10 @@ const Home = () => {
         refreshControl={
           <RefreshControl refreshing={isRefresh} onRefresh={handleRefresh} />
         }
+      />
+      <FullSizePhotoModal
+        selectedPhoto={selectedPhoto}
+        onCloseModal={onCloseModal}
       />
     </View>
   );
