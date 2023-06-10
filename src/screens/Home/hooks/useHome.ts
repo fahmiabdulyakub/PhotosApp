@@ -11,6 +11,26 @@ const useHome = () => {
   const [isAllFetched, setIsAllFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [isRefresh, setIsRefresh] = useState(false);
+
+  useEffect(() => {
+    fetchPhotos(searchQuery, 1);
+  }, []);
+
+  const fetchPhotos = (query: string, pageNumber: number) => {
+    setIsLoading(true);
+    searchPhotos(query, pageNumber)
+      .then(response => {
+        setPhotos(prevPhotos => [...prevPhotos, ...response]);
+        if (response.length === 0) {
+          setIsAllFetched(true);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching photos:', error);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const onSearch = useCallback((query: string) => {
     setSearchQuery(query);
@@ -47,23 +67,17 @@ const useHome = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPhotos(searchQuery, 1);
-  }, []);
+  const refreshPhotos = async (query: string) => {
+    setPage(1);
+    setPhotos([]);
+    setIsAllFetched(false);
+    fetchPhotos(query, 1);
+  };
 
-  const fetchPhotos = (query: string, pageNumber: number) => {
-    setIsLoading(true);
-    searchPhotos(query, pageNumber)
-      .then(response => {
-        setPhotos(prevPhotos => [...prevPhotos, ...response]);
-        if (response.length === 0) {
-          setIsAllFetched(true);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching photos:', error);
-      })
-      .finally(() => setIsLoading(false));
+  const handleRefresh = async () => {
+    setIsRefresh(true);
+    refreshPhotos(searchQuery);
+    setIsRefresh(false);
   };
 
   return {
@@ -71,11 +85,13 @@ const useHome = () => {
     searchQuery,
     selectedPhoto,
     isLoading,
+    isRefresh,
     onPhotoPress,
     onCloseModal,
     onLoadMore,
     setSearchQuery,
     onSearch,
+    handleRefresh,
   };
 };
 

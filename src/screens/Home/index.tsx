@@ -1,4 +1,4 @@
-import {View, FlatList} from 'react-native';
+import {View, FlatList, RefreshControl} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import useHome from './hooks/useHome';
@@ -7,8 +7,16 @@ import {PhotoItem} from '@components/molecules';
 import {IPhotoItem} from './types';
 
 const Home = () => {
-  const {photos, searchQuery, isLoading, onSearch, onPhotoPress, onLoadMore} =
-    useHome();
+  const {
+    photos,
+    searchQuery,
+    isLoading,
+    isRefresh,
+    onSearch,
+    onPhotoPress,
+    onLoadMore,
+    handleRefresh,
+  } = useHome();
 
   const renderItem = ({item, index}: IPhotoItem) => {
     return <PhotoItem key={index} photo={item} onPress={onPhotoPress} />;
@@ -27,6 +35,9 @@ const Home = () => {
         onEndReachedThreshold={0.5}
         contentContainerStyle={styles.listContainer}
         ListFooterComponent={<FooterPagination isLoading={isLoading} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefresh} onRefresh={handleRefresh} />
+        }
       />
     </View>
   );
